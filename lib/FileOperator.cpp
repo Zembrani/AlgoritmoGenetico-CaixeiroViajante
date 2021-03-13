@@ -40,7 +40,7 @@ struct FileOperator {
       data[values[1]].insert(myMap::value_type(values[0], values[2]));
     }
     myFile.close();
-    printData(data);
+    //printData(data);
     return data;
     }
 

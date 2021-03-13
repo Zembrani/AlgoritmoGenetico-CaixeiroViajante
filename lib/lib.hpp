@@ -1,4 +1,5 @@
 #include "FileOperator.cpp"
-#include "Object.cpp"
 #include "Solution.cpp"
 #include "GetParameters.cpp"
+#include "Genetic.cpp"
+#include "ObjectSolution.cpp"

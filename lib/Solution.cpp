@@ -36,23 +36,29 @@ struct Solution {
     uniform_int_distribution<> distrib(0, qtInstances-1);
     // Real code
     for(int i=0; i < amountOfChanges; i++){
-      int holder = distrib(gen);
-      flip(holder);
+      int first = distrib(gen);
+      int second = distrib(gen);
+      flip(first, second);
     }
   }
 
-  void flip(int position){
-    solution[position] = solution[position] > 0 ? false : true;
+  void flip(int first, int second){
+    int aux = solution[first];
+    solution[first] = solution[second];
+    solution[second] = aux;
   }
 
   void print(void) {
-    cout << "Possivel solucao" << endl;
+    //cout << "Possivel solucao" << endl;
     for (auto&& literal : solution) {
       cout << literal;
     }
     cout << endl;
   }
 
+  Solution() {
+
+  }
 
   // Solution Constructor
   Solution(int n) {
@@ -66,6 +72,7 @@ struct Solution {
       solution.push_back(initialValues[i]);
     }
   }
+
 };
 
 #endif

@@ -35,5 +35,13 @@ struct GetParameters {
         cout << "\tNúmero de Nós : " << qtInstances << endl;
         cout << "**************************" << endl;
     }
+
+    int getPopulation() {
+        return qtPopulation;
+    }
+    
+    int getInteractions() {
+        return qtInteractions;
+    }
 };
-#endif // FILEOPERATOR
+#endif

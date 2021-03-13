@@ -35,13 +35,12 @@ struct Genetic {
       sucessSolution = mergeSort(sucessSolution);
     }
 
-    for (auto&& it : sucessSolution) {
-      it.print();
-    }
+    cout << "Geração 0" << endl;
+    print(sucessSolution);
 
-    cout << "entrando no while" << endl;
     int i = 0;
     while ( i < interactions) {
+      //cout << "Geração " << i << endl;
       i++;
       if (nextGeneration.size() != 0) sucessSolution = nextGeneration;
 
@@ -54,12 +53,22 @@ struct Genetic {
         aux.push_back(sucessAmount(data, temp, qtNos));
       }
       nextGeneration = aux;
-
-      for (auto&& it : sucessSolution) {
-        it.print();
-      }
     }
+    
+    //Ordenação do vetor de resultados ao gerar a saida final
+    if (nextGeneration.size() > 1) {
+      sucessSolution = mergeSort(nextGeneration);
+    }
+    cout << endl;
+    cout << "Geração final" << endl;
+    print(sucessSolution);
 
+  }
+
+  void print(vector < ObjectSolution > solution) {
+    for (auto&& it : solution) {
+      it.print();
+    }
   }
 
   //Função que verifica a qualidade da solução
@@ -170,9 +179,9 @@ struct Genetic {
     // }
     // cout << endl;
 
+    //Seleciona alguma solução e faz uma mutação
     for (int i = 0; i < size; i++) {
       int mutate = select(size, probability);
-      cout << "solução a ser mutada " << mutate << endl;
 
       solution[mutate].solution.modify(1);
       newSolutions.push_back(solution[mutate]);
@@ -187,7 +196,8 @@ struct Genetic {
 
   //Gera um valor double entre 0.1 e 10 de acordo a quantidade de nós visitados
   double probabilityValue(int nodesVisited, int sum) {
-    return (nodesVisited * 1.0 / sum * 1.0) * 10;
+    double result = (nodesVisited * 1.0 / sum * 1.0) * 10;
+    return nodesVisited != 0 ? result : 0;
   }
 
   //Função para selecionar probabilisticamente uma solução

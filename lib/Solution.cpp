@@ -33,7 +33,8 @@ struct Solution {
     // Random functions 
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> distrib(0, qtInstances-1);
+    //Manter a partida sempre do 1
+    uniform_int_distribution<> distrib(1, qtInstances-1);
     // Real code
     for(int i=0; i < amountOfChanges; i++){
       int first = distrib(gen);

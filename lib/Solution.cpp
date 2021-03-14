@@ -11,6 +11,7 @@ using namespace std;
 struct Solution {
   int qtInstances = 0;
   vector<int> solution = vector<int>(0);
+  bool wasModified = false;
 
 // Gera uma solucao aleatoria
   void generate(void) {
@@ -29,11 +30,12 @@ struct Solution {
     shuffle(solution.begin()+1, solution.end(), eng);
   }
 
+//Realiza amountOfChanges alterações, cada alteração é consiste em fazer swap de dois nós.
   void modify(int amountOfChanges) {
     // Random functions 
     random_device rd;
     mt19937 gen(rd());
-    //Manter a partida sempre do 1
+    //Manter o ponto de partida sempre do 1
     uniform_int_distribution<> distrib(1, qtInstances-1);
     // Real code
     for(int i=0; i < amountOfChanges; i++){
@@ -41,6 +43,25 @@ struct Solution {
       int second = distrib(gen);
       flip(first, second);
     }
+  }
+
+//Realiza alterações apenas após o nó em que a solução falha. (altas chances de levar a ótimos locais)
+  void modifyV2(int amountOfChanges, int startChange) {
+    if (startChange >= qtInstances-1) {
+      wasModified = false; 
+      return;
+    }
+    random_device rd;
+    mt19937 gen(rd());
+    //Manter o ponto partida sempre do 1
+    uniform_int_distribution<> distrib(startChange, qtInstances-1);
+    // Real code
+    for(int i=0; i < amountOfChanges; i++){
+      int first = distrib(gen);
+      int second = distrib(gen);
+      flip(first, second);
+    }
+    wasModified = true;
   }
 
   void flip(int first, int second){
@@ -52,7 +73,7 @@ struct Solution {
   void print(void) {
     //cout << "Possivel solucao" << endl;
     for (auto&& literal : solution) {
-      cout << literal;
+      cout << literal << " ";
     }
     cout << endl;
   }

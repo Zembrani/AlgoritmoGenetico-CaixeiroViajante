@@ -12,7 +12,7 @@ using namespace std;
 typedef map<int, int> myMap;
 
 struct FileOperator {
-  vector<string> fileName = {"trainning.txt"};
+  vector<string> fileName = {"trainning1.txt", "trainning2.txt"};
   ifstream myFile;
   int qtNos;
 

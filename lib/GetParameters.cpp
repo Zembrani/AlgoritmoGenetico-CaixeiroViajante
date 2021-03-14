@@ -12,6 +12,9 @@ struct GetParameters {
     ifstream myFile;
     int qtPopulation;
     int qtInteractions;
+    int mutation;
+    int survival;
+    int file;
 
     void read(string fileName) {
         myFile.open(fileName);
@@ -20,6 +23,9 @@ struct GetParameters {
 
         myFile >> qtPopulation;
         myFile >> qtInteractions;
+        myFile >> mutation;
+        myFile >> survival;
+        myFile >> file;
 
         myFile.close();
     }
@@ -33,6 +39,9 @@ struct GetParameters {
         cout << "\tQuantidade de interações : " << qtInteractions << endl;
         cout << "\tPopulação : " << qtPopulation << endl;
         cout << "\tNúmero de Nós : " << qtInstances << endl;
+        cout << "\tNós para mutação : " << mutation << endl;
+        cout << "\tQt de sobreviventes : " << survival << endl;
+        cout << "\tArquivo : trainning" << file << ".txt" << endl;
         cout << "**************************" << endl;
     }
 
@@ -42,6 +51,18 @@ struct GetParameters {
     
     int getInteractions() {
         return qtInteractions;
+    }
+
+    int getMutation() {
+        return mutation;
+    }
+
+    int getSurvival() {
+        return survival;
+    }
+
+    int getFile() {
+        return file;
     }
 };
 #endif
